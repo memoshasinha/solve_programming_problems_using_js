@@ -16,7 +16,11 @@
     "url": "https://github.com/memoshasinha/solve_programming_problems_using_js/issues"
   },
   "homepage": "https://github.com/memoshasinha/solve_programming_problems_using_js#readme",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
     "jest": "^24.8.0"
+  },
+  "scripts": {
+    "test": "jest"
   }
 }
