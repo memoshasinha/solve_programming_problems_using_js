@@ -1,0 +1,22 @@
+{
+  "name": "solve_programming_problems_using_js",
+  "version": "1.0.0",
+  "description": "Solve programming problems using Javascript",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/memoshasinha/solve_programming_problems_using_js.git"
+  },
+  "author": "memosha sinha",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/memoshasinha/solve_programming_problems_using_js/issues"
+  },
+  "homepage": "https://github.com/memoshasinha/solve_programming_problems_using_js#readme",
+  "dependencies": {
+    "jest": "^24.8.0"
+  }
+}
