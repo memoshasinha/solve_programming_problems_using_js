@@ -3,25 +3,47 @@ You're new to Javascript and your code won't run because the braces, brackets, a
 To find out the syntax error you dec
 ide to write a braces/brackets/parentheses validator.*/
 const Stack = require('../stack/Stack');
-var tokens = [ ['{','}'] , ['[',']'] , ['(',')'] ];
-function isParanthesis(char) {
+let Stack = require('../common_ds/stack');
+
+let tokens = [
+    ['{', '}'],
+    ['[', ']'],
+    ['(', ')']
+];
+let openBrackets = [];
+/**
+ * Initialise the openParanthesis set
+ */
+function initialiseOpenParanthesisValues() {
+    tokens.map(values => {
+        openBrackets.push(values[0]);
+    });
+}
+/**
+ * Check if the value passed is open paranthesis
+ * @param {*} value 
+ */
+function isOpenParanthesis(value) {
+    initialiseOpenParanthesisValues();
+    return value.length !== 0 ? openBrackets.includes(value) : new Error("open paranthesis cannot be of zero length");
+}
+/**
+ * Check if the value passed is paranthesis
+ * @param {*} char 
+ */
+function isParanthesis(value) {
     var str = '{}[]()';
-    if (str.indexOf(char) > -1) {
+    if (str.indexOf(value) > -1) {
         return true;
     } else {
         return false;
     }
 }
-
-function isOpenParenthesis(parenthesisChar) {
-    for (var j = 0; j < tokens.length; j++) {
-        if (tokens[j][0] === parenthesisChar) {
-            return true;
-        }
-    }
-    return false;
-}
-
+/**
+ * Matches the top of stack with the closed Parenthesis and if the pair looks correct then it returns true else false
+ * @param {*} topOfStack 
+ * @param {*} closedParenthesis 
+ */
 function matches(topOfStack, closedParenthesis) {
     for (var k = 0; k < tokens.length; k++) {
         if (tokens[k][0] === topOfStack &&
@@ -32,28 +54,21 @@ function matches(topOfStack, closedParenthesis) {
     return false;
 }
 
-function validate_bracket(bracket) {
-    if (bracket.length === 0) return new Error("String cannot be of zero length");
-
-    var resultStack = new Stack();
-    for (let i = 0; i < bracket.length; i++) {
-        let currSymbol = bracket.charAt(i);
-        console.log(currSymbol);
-        if (isParanthesis(currSymbol)) {
-            if (isOpenParenthesis(currSymbol)) {
-                resultStack.push(currSymbol);
+function validateExpression(expression) {
+    if (expression.length === 0) return new Error("Expression cannot be of zero length");
+    let expressionStack = new Stack();
+    for (let char of expression) {
+        if (isParanthesis(char)) {
+            if (isOpenParanthesis(char)) {
+                expressionStack.push(char);
             } else {
-                if (resultStack.length === 0) {
-                    return false;
-                }
-                var top = resultStack.pop(); 
-                if (!matches(top, currSymbol)) {
-                    return false;
-                }
+                if (expressionStack.length === 0) return "Invalid expression";
+                let top = expressionStack.pop();
+                if (!matches(top, char)) return "Invalid expression";
             }
         }
     }
-    var returnValue = resultStack.size() === 0 ? true : false;
-    return returnValue;
+    return expressionStack.size() === 0 ? "Valid expression" : "Invalid expression";
 }
+
 module.exports = validate_bracket;
