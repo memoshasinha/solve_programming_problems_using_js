@@ -71,4 +71,4 @@ function validateExpression(expression) {
     return expressionStack.size() === 0 ? "Valid expression" : "Invalid expression";
 }
 
-module.exports = validate_bracket;
+module.exports = validateExpression;
