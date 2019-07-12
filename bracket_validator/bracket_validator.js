@@ -57,18 +57,20 @@ function matches(topOfStack, closedParenthesis) {
 function validateExpression(expression) {
     if (expression.length === 0) return new Error("Expression cannot be of zero length");
     let expressionStack = new Stack();
+    expressionStack.clear();
     for (let char of expression) {
         if (isParanthesis(char)) {
             if (isOpenParanthesis(char)) {
                 expressionStack.push(char);
             } else {
-                if (expressionStack.length === 0) return "Invalid expression";
                 let top = expressionStack.pop();
                 if (!matches(top, char)) return "Invalid expression";
             }
         }
     }
-    return expressionStack.size() === 0 ? "Valid expression" : "Invalid expression";
+    if (expressionStack.size() === 0) {
+        return "Valid expression";
+    }
 }
 
 module.exports = validateExpression;
