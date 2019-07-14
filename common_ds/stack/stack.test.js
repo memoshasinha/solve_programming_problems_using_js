@@ -17,6 +17,7 @@ test('Remove elements from stack', () => {
 
 
 test('Fetch from empty stack', () => {
-    let poppedElement = expressionStack.peek();
-    expect(poppedElement).toStrictEqual("sample");
+    let topElement = expressionStack.peek();
+    let error = new Error("Empty Stack");
+    expect(topElement).toStrictEqual(error);
 });
