@@ -2,7 +2,7 @@
 You're new to Javascript and your code won't run because the braces, brackets, and parentheses are off. 
 To find out the syntax error you decide to write a braces/brackets/parentheses validator.*/
 
-let Stack = require('../common_ds/stack');
+let Stack = require('../../common_ds/stack/stack');
 
 let tokens = [
     ['{', '}'],
