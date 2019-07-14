@@ -1,31 +1,27 @@
-var Stack = (function () {
-	var wmkey = {};
-	var items = new WeakMap();
+var Stack = function () {
+	this.stackMap = new WeakMap();
+	this.key = {};
+	this.stackMap.set(this.key, []);
+}
+Stack.prototype.push = function (value) {
+	let stack = this.stackMap.get(this.key);
+	stack.push(value);
+}
+Stack.prototype.pop = function () {
+	let stack = this.stackMap.get(this.key);
+	return stack.pop();
+}
+Stack.prototype.peek = function () {
+	if (this.size() === 0)
+        return new Error("Empty Stack");
+	var stack = this.stackMap.get(this.key);
+	return stack[stack.length - 1];
+};
+Stack.prototype.clear = function () {
+	this.stackMap.set(this.key, []);
+};
+Stack.prototype.size = function () {
+	return this.stackMap.get(this.key).length;
+};
 
-	items.set(wmkey, []);
-
-	function Stack() {
-
-	}
-
-	Stack.prototype.push = function (element) {
-		var stack = items.get(wmkey);
-		stack.push(element);
-	};
-	Stack.prototype.pop = function () {
-		var stack = items.get(wmkey);
-		return stack.pop();
-	};
-	Stack.prototype.peek = function () {
-		var stack = items.get(wmkey);
-		return stack[stack.length - 1];
-	};
-	Stack.prototype.clear = function () {
-		items.set(wmkey, []);
-	};
-	Stack.prototype.size = function () {
-		return items.get(wmkey).length;
-	};
-	return Stack;
-}());
 module.exports = Stack;
