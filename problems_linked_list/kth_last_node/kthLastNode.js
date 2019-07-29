@@ -1,54 +1,40 @@
-function kthToLastNode(k, head) {
+function kthToLastNode(head, k) {
 
     if (k < 1) {
-      throw new Error(`Impossible to find less than first to last node: ${k}`);
+        throw new Error(`Impossible to find less than first to last node: ${k}`);
     }
-  
+
     let leftNode = head;
     let rightNode = head;
-  
-    // Move rightNode to the kth node
-    for (let i = 0; i < k - 1; i++) {
-  
-      // But along the way, if a rightNode doesn't have a next,
-      // then k is greater than the length of the list and there
-      // can't be a kth-to-last node! we'll raise an error
-      if (!rightNode.next) {
-        throw new Error(`k is larger than the length of the linked list: ${k}`);
-      }
-  
-      rightNode = rightNode.next;
+    for (let i = 0; i < k; i++) {
+        rightNode = rightNode.next;
+
     }
-  
-    // Starting with leftNode on the head,
-    // move leftNode and rightNode down the list,
-    // maintaining a distance of k between them,
-    // until rightNode hits the end of the list
+    if (rightNode == null)
+        return leftNode.next;
     while (rightNode.next) {
-      leftNode = leftNode.next;
-      rightNode = rightNode.next;
+        leftNode = leftNode.next;
+        rightNode = rightNode.next;
     }
-  
-    // Since leftNode is k nodes behind rightNode,
-    // leftNode is now the kth to last node!
-    return leftNode;
-  }
-  class LinkedListNode {
+    leftNode.next = leftNode.next.next;
+    return head;
+}
+class LinkedListNode {
     constructor(value) {
-      this.value = value;
-      this.next = null;
+        this.value = value;
+        this.next = null;
     }
-  }
-  
-  const a = new LinkedListNode('Angel Food');
-  const b = new LinkedListNode('Bundt');
-  const c = new LinkedListNode('Cheese');
-  const d = new LinkedListNode("Devil's Food");
-  const e = new LinkedListNode('Eccles');
-  
-  a.next = b;
-  b.next = c;
-  c.next = d;
-  d.next = e;
-  
-  console.log(kthToLastNode(2, a));
+}
+
+const a = new LinkedListNode('Angel Food');
+const b = new LinkedListNode('Bundt');
+const c = new LinkedListNode('Cheese');
+const d = new LinkedListNode("Devil's Food");
+const e = new LinkedListNode('Eccles');
+
+a.next = b;
+b.next = c;
+c.next = d;
+d.next = e;
+
+console.log(kthToLastNode(a, 2));
