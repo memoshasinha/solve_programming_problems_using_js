@@ -17,5 +17,4 @@ var insertionSortAscending = function(arr) {
     }
     return arr;
 };
-console.log(insertionSortAscending([5,2,4,3,1]));
 module.exports = insertionSortAscending;
